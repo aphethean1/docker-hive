@@ -46,14 +46,25 @@ services:
 
   nodemanager1:
     image: bde2020/hadoop-nodemanager:2.0.0-hadoop2.7.4-java8
-    container_name: nodemanager
-    hostname: nodemanager
+    container_name: nodemanager1
+    hostname: nodemanager1
     environment:
       SERVICE_PRECONDITION: "namenode:50070 datanode:50075 resourcemanager:8088"
     env_file:
       - ./hadoop-hive.env
     ports:
       - "8042:8042"
+
+#  nodemanager2:
+#    image: bde2020/hadoop-nodemanager:2.0.0-hadoop2.7.4-java8
+#    container_name: nodemanager2
+#    hostname: nodemanager2
+#    environment:
+#      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 resourcemanager:8088"
+#    env_file:
+#      - ./hadoop-hive.env
+#    ports:
+#      - "9042:8042"
       
   historyserver:
     image: bde2020/hadoop-historyserver:2.0.0-hadoop2.7.4-java8
