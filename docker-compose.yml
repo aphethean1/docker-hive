@@ -45,7 +45,7 @@ services:
       - "8032:8032"
 
   nodemanager1:
-    image: bde2020/hadoop-nodemanager:2.0.0-hadoop2.7.4-java8
+    build: nodemanager/.
     container_name: nodemanager1
     hostname: nodemanager1
     environment:
@@ -60,10 +60,10 @@ services:
 # This entrypoint hack is to support a yarn property with an underscore
 # cat /opt/hadoop-2.7.4/etc/hadoop/yarn-site.xml | sed \"s/spark.shuffle/spark_shuffle/g\" | > /opt/hadoop-2.7.4/etc/hadoop/yarn-site.xml
 #
-    entrypoint: bash -c "cp /local/mapred_jars/spark-2.3.4-yarn-shuffle.jar /opt/hadoop-2.7.4/share/hadoop/yarn/lib/ 
-        && cat /entrypoint.sh | sed \"s#s/___/-/g; s/__/_/g; s/_/./g#s/___/-/g; s/_/./g; s/[.][.]/_/g#g\" > /entrypoint2.sh 
-        && chmod +x /entrypoint2.sh 
-        && /entrypoint2.sh /run.sh"
+#    entrypoint: bash -c "cp /local/mapred_jars/spark-2.3.4-yarn-shuffle.jar /opt/hadoop-2.7.4/share/hadoop/yarn/lib/ 
+#        && cat /entrypoint.sh | sed \"s#s/___/-/g; s/__/_/g; s/_/./g#s/___/-/g; s/_/./g; s/[.][.]/_/g#g\" > /entrypoint2.sh 
+#        && chmod +x /entrypoint2.sh 
+#        && /entrypoint2.sh /run.sh"
 #    entrypoint: bash -c "cat /entrypoint.sh | sed \"s#s/___/-/g; s/__/_/g; s/_/./g#s/___/-/g; s/_/./g; s/[.][.]/_/g#g\""
 #    entrypoint: bash -c "cat /entrypoint.sh | sed \"s#s/___/-/g; s/__/_/g; s/_/\./g#XXXXX#g\""
 #    entrypoint: bash -c "echo \"A___B__C_\" | sed \"s/___/-/g; s/_/./g; s/\.\./_/g\""
